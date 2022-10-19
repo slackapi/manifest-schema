@@ -41,4 +41,9 @@ logs/
 *.db
 .pytype/
 .vscode/
-scripts
+.tox
+.cache
+.pytest_cache/
+.python-version
+pip
+.mypy_cache/
