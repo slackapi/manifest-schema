@@ -1,0 +1,44 @@
+# general things to ignore
+build/
+dist/
+docs/_sources/
+docs/.doctrees
+.eggs/
+*.egg-info/
+*.egg
+*.py[cod]
+__pycache__/
+*.so
+*~
+
+# ignore Eclipse files
+.project
+.classpath
+.settings
+.metadata
+.checkstyle
+
+# ignore Idea files
+*.iml
+*.ipr
+*.iws
+.idea
+
+# codecov / coverage
+.coverage
+cov_*
+coverage.xml
+
+# virtualenv
+env*/
+venv/
+.venv*
+.env*
+
+# misc
+.DS_Store
+logs/
+*.db
+.pytype/
+.vscode/
+scripts
