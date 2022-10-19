@@ -2,7 +2,7 @@ name: Linting validation using flake8
 
 on:
   push:
-    branches: [ main, initial-submission ]
+    branches: [ main ]
   pull_request:
 
 jobs:

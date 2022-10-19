@@ -2,7 +2,7 @@ name: Run all the unit tests
 
 on:
   push:
-    branches: [ main, initial-submission ]
+    branches: [ main ]
   pull_request:
 
 jobs:

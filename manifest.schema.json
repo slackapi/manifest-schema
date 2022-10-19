@@ -25,7 +25,7 @@
                     ]
                 },
                 {
-                    "$ref": "file:///Users/wbergamin/Documents/slack/tools/manifest-schema/schemas/manifest.schema.1.0.0.json"
+                    "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/initial-submission/schemas/manifest.schema.1.0.0.json"
                 }
             ]
         },
@@ -50,7 +50,7 @@
                     ]
                 },
                 {
-                    "$ref": "file:///Users/wbergamin/Documents/slack/tools/manifest-schema/schemas/manifest.schema.2.0.0.json"
+                    "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/initial-submission/schemas/manifest.schema.2.0.0.json"
                 }
             ]
         },
@@ -72,7 +72,7 @@
                     ]
                 },
                 {
-                    "$ref": "file:///Users/wbergamin/Documents/slack/tools/manifest-schema/schemas/manifest.schema.1.0.0.json"
+                    "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/initial-submission/schemas/manifest.schema.1.0.0.json"
                 }
             ]
         },
@@ -87,7 +87,7 @@
                     }
                 },
                 {
-                    "$ref": "file:///Users/wbergamin/Documents/slack/tools/manifest-schema/schemas/manifest.schema.1.0.0.json"
+                    "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/initial-submission/schemas/manifest.schema.1.0.0.json"
                 }
             ]
         }
