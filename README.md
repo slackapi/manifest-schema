@@ -26,7 +26,7 @@ To get these capabilities simply include the schema in a JSON file
 ```json
 {
   "$schema": "https://raw.githubusercontent.com/slackapi/manifest-schema/main/manifest.schema.json",
-  "_manifest":{
+  "_metadata":{
     "major_version": 2
   },
   "settings": { ... }
