@@ -1,6 +1,6 @@
 # Manifest Schema
 
-This project contains publicly available json schemas that define slacks `manifest.json` application file.
+This project contains publicly available json schemas that define slacks `manifest.json` file. JSON schemas can be used for a number of tasks but the purpose of this specific schema is to provide developers validation and prediction capabilities while editing `manifest.json` files in IDEs.
 
 **Guide Outline**:
 
@@ -17,7 +17,7 @@ This project contains publicly available json schemas that define slacks `manife
 
 ## Usage
 
-JSON schemas can be used for various tasks, the goal of this project is to provide a JSON schema that defines slacks `manifest.json` and provides validation and IntelliSense capabilities to developers editing `manifest.json` files in IDE.
+JSON schemas can be used for various tasks, the goal of this project is to provide a JSON schema that defines slacks `manifest.json` and provides validation and IntelliSense capabilities to developers editing `manifest.json` files in IDEs that support these features.
 
 <img src="https://user-images.githubusercontent.com/25348381/195903601-ab1e200a-53b0-470a-9374-bad8b93b35fd.gif" width="60%"/>
 

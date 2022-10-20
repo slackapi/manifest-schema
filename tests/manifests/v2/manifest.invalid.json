@@ -19,10 +19,7 @@
   },
   "oauth_config": {
     "scopes": {
-      "bot": [
-        "chat:write",
-        "chat:write.public"
-      ]
+      "bot": ["chat:write", "chat:write.public"]
     }
   },
   "settings": {
@@ -56,12 +53,7 @@
             "description": "End Date"
           }
         },
-        "required": [
-          "employee",
-          "manager",
-          "start_date",
-          "end_date"
-        ]
+        "required": ["employee", "manager", "start_date", "end_date"]
       },
       "output_parameters": {
         "properties": {},
@@ -90,11 +82,7 @@
             "description": "Please describe your request",
             "interactivity": "{{inputs.interactivity}}",
             "fields": {
-              "required": [
-                "manager",
-                "start_date",
-                "end_date"
-              ],
+              "required": ["manager", "start_date", "end_date"],
               "elements": [
                 {
                   "name": "manager",

@@ -1,5 +1,5 @@
-from jsonschema import validate, ValidationError
 import pytest
+from jsonschema import ValidationError, validate
 
 from .utils import get_json, get_schema
 

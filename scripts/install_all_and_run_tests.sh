@@ -14,9 +14,11 @@ if [[ $test_target != "" ]]
 then
   pip install -U -r requirements.txt && \
     black tests/ && \
+    npx prettier --write schemas/**/*.json *.json tests/**/*.json && \
     pytest $1
 else
   pip install -U -r requirements.txt && \
     black tests/ && \
+    npx prettier --write schemas/**/*.json *.json tests/**/*.json && \
     pytest
 fi
