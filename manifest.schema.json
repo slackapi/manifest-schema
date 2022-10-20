@@ -1,5 +1,5 @@
 {
-    "$id": "https://github.com/slackapi/manifest-schema",
+    "$id": "https://github.com/slackapi/manifest-schema/blob/main/manifest.schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "All Versions Slack App Manifest File Configuration",
     "type": "object",

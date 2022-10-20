@@ -59,3 +59,41 @@ Once you installed all the required dependencies, you can use the following one.
 ```bash
 ./scripts/run_tests.sh
 ```
+
+#### Production Deployment
+
+1. Create the commit for the release:
+   - Commit with a message including the new version number. For example `1.2.3` & Push the commit to a branch and create a PR to sanity check.
+     - `git checkout -b v1.2.3-release`
+     - `git commit -m 'version 1.2.3'`
+     - `git push {your-fork} v1.2.3-release`
+   - Merge in release PR after getting an approval from at least one maintainer.
+   - Create a git tag for the release. For example `git tag v1.2.3`.
+   - Push the tag up to github with `git push origin --tags`
+
+2. Distribute the release
+   - Use the latest stable Python runtime
+   - `python -m venv .venv`
+   - `./scripts/deploy_to_pypi_org.sh`
+   - Create a GitHub release - <https://github.com/slackapi/bolt-python/releases>
+
+   ```markdown
+   ## New Features
+
+   ### Awesome Feature 1
+
+   Description here.
+
+   ### Awesome Feature 2
+
+   Description here.
+
+   ## Changes
+
+   * #123 Make it better - thanks @SlackHQ
+   * #123 Fix something wrong - thanks @seratch
+   ```
+
+## Everything else
+
+When in doubt, find the other maintainers and ask.
