@@ -6,7 +6,7 @@ well.
 
 There are many ways you can contribute! :heart:
 
-## Bug Reports and Fixes :bug
+## Bug Reports and Fixes :bug:
 
 - If you find a bug, please search for it in the [Issues](https://github.com/slackapi/manifest-schema/issues), and if it isn't already tracked,
    [create a new issue](https://github.com/slackapi/manifest-schema/issues/new). Fill out the "Bug Report" section of the issue template. Even if an Issue is closed, feel free to comment and add details, it will still
@@ -15,7 +15,7 @@ There are many ways you can contribute! :heart:
 - If you'd like to submit a fix for a bug, [follow the maintainers guide](./maintainers_guide.md) and mention the Issue number.
 - Include tests that isolate the bug and verifies that it was fixed.
 
-## New Features :bulb
+## New Features :bulb:
 
 - If you'd like to add new functionality to this project, describe the problem you want to solve in a [new Issue](https://github.com/slackapi/manifest-schema/issues/new).
 - Issues that have been identified as a feature request will be labelled `enhancement`.
@@ -23,16 +23,16 @@ There are many ways you can contribute! :heart:
    maintainers before spending too much time writing the code. In some cases, `enhancement`s may
    not align well with the project objectives at the time.
 
-## Tests :mag:, Documentation :books:, Miscellaneous :sparkles
+## Tests :mag:, Documentation :books:, Miscellaneous :sparkles:
 
 - If you'd like to improve the tests, you want to make the documentation clearer, you have an
    alternative implementation of something that may have advantages over the way its currently
    done, or you have any other change, we would be happy to hear about it!
-- If its a trivial change, go ahead and [follow the maintainers guide](./maintainers_guide.md) with the changes you have in mind.
+- If it's a trivial change, go ahead and [follow the maintainer's guide](./maintainers_guide.md) with the changes you have in mind.
 - If not, [open an Issue](https://github.com/slackapi/manifest-schema/issues/new) to discuss the idea first.
 
 If you're new to our project and looking for some way to make your first contribution, look for
-Issues labelled `good first contribution`.
+Issues labelled `good first issue`.
 
 ## Requirements
 

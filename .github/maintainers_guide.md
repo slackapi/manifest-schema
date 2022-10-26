@@ -40,7 +40,7 @@ source env_3.10.7/bin/activate
 
 ### JSON
 
-You need a supported version of [Node.js](https://nodejs.org/en/) (see `package.json` field "engines") and npx (which is distributed with Node.js).
+You need a supported version of [Node.js](https://nodejs.org/en/) (see `package.json` field "engines") and `npx` (which is distributed with Node.js).
 
 This project contains an [`.editorconfig`](../.editorconfig) file. It is used by [Prettier](https://prettier.io/) to lint and format the JSON files
 
