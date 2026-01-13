@@ -48,10 +48,10 @@ This project contains an [`.editorconfig`](../.editorconfig) file. It is used by
 
 ```zsh
 # Run flake8 & prettier from root directory for linting
-./scripts/run_lint.sh
+./scripts/lint.sh
 
 # Run black & prettier from root directory for code formatting
-./scripts/run_format.sh
+./scripts/format.sh
 ```
 
 ## Testing
@@ -69,7 +69,7 @@ If this is your first time to run tests, although it may take a bit long time, r
 Once you installed all the required dependencies, you can use the following one.
 
 ```bash
-./scripts/run_tests.sh
+./scripts/test.sh
 ```
 
 ## Production Deployment

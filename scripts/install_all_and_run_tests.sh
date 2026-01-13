@@ -8,17 +8,15 @@ cd ${script_dir}/..
 
 test_target="$1"
 
-pip install -e .
+pip install -U -e .
 
 if [[ $test_target != "" ]]
 then
-  pip install -U -r requirements.txt && \
-    black tests/ && \
+  black tests/ && \
     npx prettier --write schemas/**/*.json *.json tests/**/*.json && \
     pytest $1
 else
-  pip install -U -r requirements.txt && \
-    black tests/ && \
+  black tests/ && \
     npx prettier --write schemas/**/*.json *.json tests/**/*.json && \
     pytest
 fi
