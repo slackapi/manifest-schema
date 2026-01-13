@@ -388,6 +388,37 @@
       "maxItems": 5,
       "uniqueItems": true
     },
+    "app-manifests.v1.features.assistant_view": {
+      "type": "object",
+      "description": "Settings related to assistant view for apps using AI features.",
+      "additionalProperties": false,
+      "required": ["assistant_description"],
+      "properties": {
+        "assistant_description": {
+          "type": "string",
+          "description": "A string that describes the app assistant."
+        },
+        "suggested_prompts": {
+          "type": "array",
+          "description": "An array of pre-written prompts designed to guide users when interacting with the app assistant.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title", "message"],
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "The prompt title."
+              },
+              "message": {
+                "type": "string",
+                "description": "The prompt content."
+              }
+            }
+          }
+        }
+      }
+    },
     "app-manifests.v1.features.schema": {
       "type": "object",
       "description": "Key app features driving interactivity and functionality.",
@@ -413,6 +444,9 @@
         },
         "unfurl_domains": {
           "$ref": "#/definitions/app-manifests.v1.features.unfurl_domains"
+        },
+        "assistant_view": {
+          "$ref": "#/definitions/app-manifests.v1.features.assistant_view"
         }
       }
     },
