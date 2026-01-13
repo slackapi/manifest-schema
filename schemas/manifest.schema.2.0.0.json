@@ -410,6 +410,37 @@
       },
       "description": "An array of strings containing valid unfurl domains to register. A maximum of 5 unfurl domains can be included in this array. Please consult the unfurl docs for a list of domain requirements."
     },
+    "app-manifests.v1.features.assistant_view": {
+      "type": "object",
+      "description": "Settings related to assistant view for apps using AI features.",
+      "additionalProperties": false,
+      "required": ["assistant_description"],
+      "properties": {
+        "assistant_description": {
+          "type": "string",
+          "description": "A string that describes the app assistant."
+        },
+        "suggested_prompts": {
+          "type": "array",
+          "description": "An array of pre-written prompts designed to guide users when interacting with the app assistant.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title", "message"],
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "The prompt title."
+              },
+              "message": {
+                "type": "string",
+                "description": "The prompt content."
+              }
+            }
+          }
+        }
+      }
+    },
     "app-manifests.v1.features.schema": {
       "type": "object",
       "properties": {
@@ -433,6 +464,9 @@
         },
         "unfurl_domains": {
           "$ref": "#/definitions/app-manifests.v1.features.unfurl_domains"
+        },
+        "assistant_view": {
+          "$ref": "#/definitions/app-manifests.v1.features.assistant_view"
         }
       },
       "description": "A group of settings corresponding to the Features section of the app config pages.",
