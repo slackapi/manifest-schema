@@ -86,7 +86,7 @@ Once you installed all the required dependencies, you can use the following one.
 
      ```json
      {
-        "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/v1.2.3/schemas/manifest.schema.1.0.0.json"
+       "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/v1.2.3/schemas/manifest.schema.1.0.0.json"
      }
      ```
 
@@ -104,7 +104,7 @@ Once you installed all the required dependencies, you can use the following one.
      - Repeat from [step 1](#step1).
    - Merge in release PR after getting an approval from at least one maintainer.
 4. Your changes are now live on
-   <https://raw.githubusercontent.com/slackapi/manifest-schema/main/schemas/manifest.schema.json>
+   <https://raw.githubusercontent.com/slackapi/manifest-schema/main/manifest.schema.json>
 
 ## Everything else
 
