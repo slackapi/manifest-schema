@@ -21,7 +21,7 @@
           "required": ["_metadata"]
         },
         {
-          "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/v0.0.0/schemas/manifest.schema.1.0.0.json"
+          "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/v0.1.0/schemas/manifest.schema.1.0.0.json"
         }
       ]
     },
@@ -42,7 +42,7 @@
           "required": ["_metadata"]
         },
         {
-          "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/v0.0.0/schemas/manifest.schema.2.0.0.json"
+          "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/v0.1.0/schemas/manifest.schema.2.0.0.json"
         }
       ]
     },
@@ -60,7 +60,7 @@
           "required": ["_metadata"]
         },
         {
-          "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/v0.0.0/schemas/manifest.schema.1.0.0.json"
+          "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/v0.1.0/schemas/manifest.schema.1.0.0.json"
         }
       ]
     },
@@ -73,7 +73,7 @@
           }
         },
         {
-          "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/v0.0.0/schemas/manifest.schema.1.0.0.json"
+          "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/v0.1.0/schemas/manifest.schema.1.0.0.json"
         }
       ]
     }
