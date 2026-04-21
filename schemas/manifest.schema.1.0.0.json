@@ -158,6 +158,10 @@
           "type": "string",
           "minLength": 175,
           "maxLength": 4000
+        },
+        "icon": {
+          "type": "string",
+          "description": "A string containing a path to the icon image file for the app."
         }
       }
     },

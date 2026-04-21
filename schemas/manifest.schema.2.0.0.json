@@ -162,6 +162,10 @@
           "minLength": 175,
           "maxLength": 4000,
           "description": "A string with a longer version of the description of the app. Maximum length is 4000 characters."
+        },
+        "icon": {
+          "type": "string",
+          "description": "A string containing a path to the icon image file for the app."
         }
       },
       "description": "A group of settings that describe parts of an app's appearance within Slack. If you're distributing the app via the App Directory, read our listing guidelines to pick the best values for these settings",
