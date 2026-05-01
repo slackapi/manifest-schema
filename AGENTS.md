@@ -7,6 +7,10 @@ Public JSON schemas defining Slack's `manifest.json` file structure. Used by IDE
 ## Commands
 
 ```bash
+# Create and activate a virtual environment (first time only)
+python -m venv .venv
+source .venv/bin/activate
+
 # Install dependencies (first time or after changes)
 pip install -U -e .
 

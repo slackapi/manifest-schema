@@ -479,6 +479,22 @@
             "maxLength": 50
           },
           "maxItems": 255
+        },
+        "user_optional": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "maxItems": 255
+        },
+        "bot_optional": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "maxItems": 255
         }
       }
     },
