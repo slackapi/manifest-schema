@@ -503,6 +503,24 @@
             "maxLength": 50
           },
           "description": "An array of strings containing bot scopes to request upon app installation. A maximum of 255 scopes can included in this array."
+        },
+        "user_optional": {
+          "type": "array",
+          "maxItems": 255,
+          "items": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "description": "An array of strings containing optional user scopes to request upon app installation. A maximum of 255 scopes can included in this array."
+        },
+        "bot_optional": {
+          "type": "array",
+          "maxItems": 255,
+          "items": {
+            "type": "string",
+            "maxLength": 50
+          },
+          "description": "An array of strings containing optional bot scopes to request upon app installation. A maximum of 255 scopes can included in this array."
         }
       },
       "description": "A subgroup of settings that describe permission scopes configuration.",
