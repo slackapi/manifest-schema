@@ -56,6 +56,13 @@ This project contains an [`.editorconfig`](../.editorconfig) file. It is used by
 
 ## Testing
 
+Ensure the virtual environment is activated and dependencies are installed before running scripts:
+
+```bash
+source .venv/bin/activate
+pip install -U -e .
+```
+
 ### Run All the Unit Tests
 
 If you make some changes to this SDK, please write corresponding unit tests as much as possible. You can easily run all the tests by running the following script.
