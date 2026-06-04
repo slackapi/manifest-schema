@@ -98,7 +98,7 @@ When it's time to release decide a next version in adherence to [Semantic Versio
    - `git checkout -b chore-release-1-2-3`
    - `git add manifest.schema.json`
    - `git commit -m 'version 1.2.3'`
-   - `git tag v1.2.3`
+   - `git tag v1.2.3 -m 'v1.2.3'`
    - `git push origin chore-release-1-2-3`
    - `git push origin v1.2.3`
 
