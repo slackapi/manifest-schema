@@ -44,6 +44,9 @@
     },
     "external_auth_providers": {
       "$ref": "#/definitions/app-manifests.v1.hermes.third_party_auth.providers"
+    },
+    "mcp_servers": {
+      "$ref": "#/definitions/app-manifests.v1.mcp_servers"
     }
   },
   "definitions": {
@@ -1078,6 +1081,20 @@
                           "type": "object"
                         }
                       }
+                    },
+                    "use_pkce": {
+                      "type": "boolean",
+                      "description": "Set to true if your server requires PKCE."
+                    },
+                    "token_url_config": {
+                      "type": "object",
+                      "properties": {
+                        "use_basic_auth_scheme": {
+                          "type": "boolean",
+                          "description": "Set to true if your token endpoint expects client_secret_basic; false for client_secret_post."
+                        }
+                      },
+                      "additionalProperties": false
                     }
                   }
                 }
@@ -1097,6 +1114,38 @@
       "properties": {
         "oauth2": {
           "$ref": "#/definitions/app-manifests.v1.hermes.third_party_auth.providers.oauth2"
+        }
+      }
+    },
+    "app-manifests.v1.mcp_servers": {
+      "description": "Declares the MCP servers used by the app.",
+      "type": "object",
+      "patternProperties": {
+        ".*": {
+          "type": "object",
+          "required": ["url"],
+          "additionalProperties": false,
+          "properties": {
+            "url": {
+              "type": "string",
+              "pattern": "^https:\\/\\/",
+              "description": "The URL of the MCP server"
+            },
+            "auth_provider_key": {
+              "type": "string",
+              "description": "The key of the auth provider to use for authentication"
+            },
+            "auth_type": {
+              "type": "string",
+              "enum": [
+                "no_auth",
+                "slack_identity_auth",
+                "manual_auth",
+                "dynamic_client_registration"
+              ],
+              "description": "The authentication type for this MCP server"
+            }
+          }
         }
       }
     }
