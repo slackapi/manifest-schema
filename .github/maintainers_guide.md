@@ -81,34 +81,34 @@ Once you installed all the required dependencies, you can use the following one.
 
 ## Production Deployment
 
-**NOTE**: The `main` branch is production!
+> Note: The [`manifest.schema.json`](https://github.com/slackapi/manifest-schema/blob/main/manifest.schema.json) file on the `main` branch is production!
 
-1. <a id="step1"></a>Create a tag for your potential release
-   - Your tag name will Bump the version number in adherence to [Semantic Versioning](http://semver.org/) of the previous tags
-   - For example `1.2.3`, from your current branch:
-     - `git tag v1.2.3`
-     - `git push origin --tags`
-2. Update the `$ref` fields in your JSON schemas to the files in the tag.
-   - For each `$ref` field your changes affect update the value with the `raw.githubusercontent.com` of the tagged file, example:
+When it's time to release decide a next version in adherence to [Semantic Versioning](http://semver.org/) based on [commits](https://github.com/slackapi/manifest-schema/commits/main/) since the most recent [tag](https://github.com/slackapi/manifest-schema/tags).
 
-     ```json
+1. Update the `$ref` fields of the `manifest.schema.json` schema to expect the next release tag:
+
+   ```diff
      {
-       "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/v1.2.3/schemas/manifest.schema.1.0.0.json"
+   -   "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/v1.2.2/schemas/manifest.schema.1.0.0.json"
+   +   "$ref": "https://raw.githubusercontent.com/slackapi/manifest-schema/v1.2.3/schemas/manifest.schema.1.0.0.json"
      }
-     ```
+   ```
 
-   - Commit with a message including the new version number. For example `1.2.3` & Push the commit to your branch
+2. Create a tag for the updated release
+   - `git checkout -b chore-release-1-2-3`
    - `git commit -m 'version 1.2.3'`
-   - `git push origin {your-branch}`
+   - `git tag v1.2.3`
+   - `git push origin chore-release-1-2-3`
+   - `git push origin v1.2.3`
 
-3. Create a PR with `main`
+3. Create a PR before merge to `main` branch
    - Ensure all tests pass!
    - For changes based on feedback
      - Delete created tag
        - `git tag -d v1.2.3`
        - `git push origin --delete v1.2.3`
      - Make commit changes to branch
-     - Repeat from [step 1](#step1).
+     - Repeat from step 1
    - Merge in release PR after getting an approval from at least one maintainer.
 4. Your changes are now live on
    <https://raw.githubusercontent.com/slackapi/manifest-schema/main/manifest.schema.json>
