@@ -511,6 +511,9 @@
         },
         "token_management_enabled": {
           "type": "boolean"
+        },
+        "pkce_enabled": {
+          "type": "boolean"
         }
       }
     },
@@ -650,6 +653,9 @@
         },
         "function_runtime": {
           "type": "string"
+        },
+        "is_mcp_enabled": {
+          "type": "boolean"
         }
       }
     },
