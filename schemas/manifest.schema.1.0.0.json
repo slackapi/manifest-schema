@@ -1084,10 +1084,11 @@
                     },
                     "use_pkce": {
                       "type": "boolean",
-                      "description": "Set to true if your server requires PKCE."
+                      "description": "Boolean flag indicating if this provider uses PKCE."
                     },
                     "token_url_config": {
                       "type": "object",
+                      "description": "An object with one boolean value, use_basic_auth_scheme.",
                       "properties": {
                         "use_basic_auth_scheme": {
                           "type": "boolean",
