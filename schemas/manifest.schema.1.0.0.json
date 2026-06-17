@@ -1118,8 +1118,9 @@
       }
     },
     "app-manifests.v1.mcp_servers": {
-      "description": "Declares the MCP servers used by the app.",
+      "description": "Declares the MCP servers used by the app. Maximum of 20 servers.",
       "type": "object",
+      "maxProperties": 20,
       "patternProperties": {
         ".*": {
           "type": "object",
@@ -1129,21 +1130,27 @@
             "url": {
               "type": "string",
               "pattern": "^https:\\/\\/",
-              "description": "The URL of the MCP server"
+              "maxLength": 500,
+              "description": "A string containing the URL of the MCP server. Maximum length is 500 characters."
             },
             "auth_provider_key": {
               "type": "string",
-              "description": "The key of the auth provider to use for authentication"
+              "maxLength": 255,
+              "description": "A string referencing the key of an external auth provider to use for authentication. Maximum length is 255 characters."
             },
             "auth_type": {
               "type": "string",
               "enum": [
+                "dynamic_client_registration",
                 "no_auth",
-                "slack_identity_auth",
                 "manual_auth",
-                "dynamic_client_registration"
+                "slack_identity_auth"
               ],
-              "description": "The authentication type for this MCP server"
+              "description": "A string specifying the authentication type. Possible values are dynamic_client_registration, no_auth, manual_auth, or slack_identity_auth."
+            },
+            "headers": {
+              "type": "object",
+              "description": "An object of HTTP headers to send with requests to the MCP server."
             }
           }
         }
