@@ -42,6 +42,9 @@
     },
     "external_auth_providers": {
       "$ref": "#/definitions/app-manifests.v2.hermes.third_party_auth.providers"
+    },
+    "mcp_servers": {
+      "$ref": "#/definitions/app-manifests.v1.mcp_servers"
     }
   },
   "description": "Describes core app information and functionality.",
@@ -1187,6 +1190,21 @@
                         }
                       },
                       "additionalProperties": false
+                    },
+                    "use_pkce": {
+                      "type": "boolean",
+                      "description": "Boolean flag indicating if this provider uses PKCE."
+                    },
+                    "token_url_config": {
+                      "type": "object",
+                      "description": "An object with one boolean value, use_basic_auth_scheme.",
+                      "properties": {
+                        "use_basic_auth_scheme": {
+                          "type": "boolean",
+                          "description": "Set to true if your token endpoint expects client_secret_basic; false for client_secret_post."
+                        }
+                      },
+                      "additionalProperties": false
                     }
                   },
                   "additionalProperties": false
@@ -1217,6 +1235,51 @@
       },
       "description": "Declares the oauth configurations used by the app.",
       "additionalProperties": false
+    },
+    "app-manifests.v1.mcp_servers": {
+      "type": "object",
+      "description": "Declares the MCP servers used by the app. Maximum of 20 servers.",
+      "maxProperties": 20,
+      "patternProperties": {
+        ".*": {
+          "type": "object",
+          "required": ["url", "auth_type"],
+          "properties": {
+            "url": {
+              "type": "string",
+              "pattern": "^https:\\/\\/",
+              "maxLength": 500,
+              "description": "A string containing the URL of the MCP server. Maximum length is 500 characters."
+            },
+            "headers": {
+              "type": "object",
+              "additionalProperties": false,
+              "patternProperties": {
+                "^.+$": {
+                  "type": "string"
+                }
+              },
+              "description": "An object of HTTP headers to send with requests to the MCP server."
+            },
+            "auth_provider_key": {
+              "type": "string",
+              "maxLength": 255,
+              "description": "A string referencing the key of an external auth provider to use for authentication. Maximum length is 255 characters."
+            },
+            "auth_type": {
+              "type": "string",
+              "enum": [
+                "dynamic_client_registration",
+                "no_auth",
+                "manual_auth",
+                "slack_identity_auth"
+              ],
+              "description": "A string specifying the authentication type. Possible values are dynamic_client_registration, no_auth, manual_auth, or slack_identity_auth."
+            }
+          },
+          "additionalProperties": false
+        }
+      }
     }
   },
   "additionalProperties": false,
