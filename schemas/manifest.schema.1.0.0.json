@@ -422,6 +422,57 @@
         }
       }
     },
+    "app-manifests.v1.features.agent_view": {
+      "type": "object",
+      "description": "Settings related to agent view for apps using agent features.",
+      "additionalProperties": false,
+      "properties": {
+        "agent_description": {
+          "type": "string",
+          "maxLength": 300,
+          "description": "A description specific to the agent, used to communicate to end users what agent functionality the app provides."
+        },
+        "suggested_prompts": {
+          "type": "array",
+          "maxItems": 4,
+          "description": "An array of pre-written prompts designed to guide users when interacting with the agent.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title", "message"],
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "The prompt title."
+              },
+              "message": {
+                "type": "string",
+                "description": "The prompt content."
+              }
+            }
+          }
+        },
+        "actions": {
+          "type": "array",
+          "description": "Quick actions surfaced in the agent UI.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "description"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The action name."
+              },
+              "description": {
+                "type": "string",
+                "description": "A short description of what the action does."
+              }
+            }
+          }
+        }
+      }
+    },
     "app-manifests.v1.features.schema": {
       "type": "object",
       "description": "Key app features driving interactivity and functionality.",
@@ -450,6 +501,9 @@
         },
         "assistant_view": {
           "$ref": "#/definitions/app-manifests.v1.features.assistant_view"
+        },
+        "agent_view": {
+          "$ref": "#/definitions/app-manifests.v1.features.agent_view"
         }
       }
     },
