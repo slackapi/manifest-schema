@@ -39,6 +39,7 @@ Tests validate manifests against the schema using `jsonschema.validate()`. Each 
 
 - Python: black, line length 100, flake8
 - JSON: Prettier, 2-space indent, LF line endings (see `.editorconfig`)
+- Schema `properties` keys are sorted alphabetically. Add new keys in their alphabetical position; reviewers should reject diffs that append to the end.
 - Tests use pytest with `GIVEN/WHEN/THEN` comment structure
 
 ## Release Process
