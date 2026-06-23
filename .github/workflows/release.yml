@@ -1,0 +1,163 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+  # TODO: temporary, for testing this workflow on the PR — remove before merge.
+  pull_request:
+  workflow_dispatch:
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions: {}
+
+jobs:
+  rc:
+    name: RC
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Gather credentials
+        id: credentials
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ secrets.GH_APP_CLIENT_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          # Scope the token to only what the release steps need: push the rc
+          # branch + tag (contents) and open/update the release PR.
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Checkout repo
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+          token: ${{ steps.credentials.outputs.token }}
+
+      - name: Decide next version
+        id: version
+        env:
+          GH_TOKEN: ${{ steps.credentials.outputs.token }}
+        run: |
+          # Highest release tag by version order. We deliberately do NOT use
+          # `git describe`: release tags are created on the `rc` branch and the
+          # PR is squash-merged, so the tagged commit is not an ancestor of
+          # `main` and `git describe` would walk past it to an older tag.
+          LATEST_TAG=$(git tag --list 'v*.*.*' --sort=-v:refname | head -n1)
+
+          # PR numbers since the latest tag, excluding prior release commits
+          # (subject "version X.Y.Z") so a previous release's labels don't leak
+          # into this version decision.
+          PR_NUMBERS=$(git log "${LATEST_TAG}..HEAD" --format='%s' \
+            | grep -v -E '^version [0-9]+\.[0-9]+\.[0-9]+' \
+            | grep -oP '#\K[0-9]+' || true)
+
+          if [ -z "$PR_NUMBERS" ]; then
+            echo "No new PRs since $LATEST_TAG"
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Search for highest semver label across PRs since the last tag
+          SEMVER="patch"
+          for PR in $PR_NUMBERS; do
+            LABELS=$(gh pr view "$PR" --json labels --jq '.labels[].name' 2>/dev/null || true)
+            if echo "$LABELS" | grep -q "semver:major"; then
+              SEMVER="major"
+              break
+            elif echo "$LABELS" | grep -q "semver:minor"; then
+              SEMVER="minor"
+            fi
+          done
+
+          # Parse current version
+          VERSION="${LATEST_TAG#v}"
+          MAJOR=$(echo "$VERSION" | cut -d. -f1)
+          MINOR=$(echo "$VERSION" | cut -d. -f2)
+          PATCH=$(echo "$VERSION" | cut -d. -f3)
+
+          # Compute next version
+          case "$SEMVER" in
+            major)
+              NEXT_VERSION="$((MAJOR + 1)).0.0"
+              ;;
+            minor)
+              NEXT_VERSION="${MAJOR}.$((MINOR + 1)).0"
+              ;;
+            patch)
+              NEXT_VERSION="${MAJOR}.${MINOR}.$((PATCH + 1))"
+              ;;
+          esac
+
+          # Skip if the schema already references this version
+          if grep -q "manifest-schema/v${NEXT_VERSION}/" manifest.schema.json; then
+            echo "Schema already at v$NEXT_VERSION, nothing to release"
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          echo "next=$NEXT_VERSION" >> "$GITHUB_OUTPUT"
+          echo "semver=$SEMVER" >> "$GITHUB_OUTPUT"
+          echo "Bumping $LATEST_TAG to v$NEXT_VERSION"
+
+      - name: Generate release commit
+        if: steps.version.outputs.has_changes == 'true'
+        env:
+          RELEASE_VERSION: ${{ steps.version.outputs.next }}
+        run: |
+          git config user.name "slackapi[bot]"
+          git config user.email "1043069+slackapi[bot]@users.noreply.github.com"
+
+          # Rewrite the pinned $ref versions to the next release tag
+          sed -i -E "s#manifest-schema/v[0-9]+\.[0-9]+\.[0-9]+/#manifest-schema/v${RELEASE_VERSION}/#g" manifest.schema.json
+
+          git commit -am "version ${RELEASE_VERSION}"
+          git tag -f "v${RELEASE_VERSION}" -m "v${RELEASE_VERSION}"
+          git push origin "HEAD:refs/heads/rc" --force
+          git push origin "v${RELEASE_VERSION}" --force
+
+      - name: Create or update release PR
+        if: steps.version.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ steps.credentials.outputs.token }}
+          RELEASE_VERSION: ${{ steps.version.outputs.next }}
+          SEMVER: ${{ steps.version.outputs.semver }}
+        run: |
+          PR_TITLE="chore: release v${RELEASE_VERSION}"
+          PR_BODY=$(cat <<EOF
+          ### Summary
+
+          Release v${RELEASE_VERSION}. This bumps the \`\$ref\` URLs in
+          \`manifest.schema.json\` to the \`v${RELEASE_VERSION}\` tag.
+
+          ### Testing
+
+          - [ ] Confirm CI is passing on the [\`main\`](https://github.com/${{ github.repository }}/commits/main) branch.
+          - [ ] Confirm CI is passing on this PR.
+          - [ ] Confirm the new version matches the expected next version.
+
+          ### Reviewers
+
+          The \`v${RELEASE_VERSION}\` tag has already been pushed to point at this
+          branch's release commit. Once merged, the change is live at the
+          [\`main\` raw URL](https://raw.githubusercontent.com/${{ github.repository }}/main/manifest.schema.json).
+          EOF
+          )
+
+          # Check if a PR from rc already exists
+          EXISTING_PR=$(gh pr list --head rc --base main --json number --jq '.[0].number' 2>/dev/null || true)
+
+          if [ -n "$EXISTING_PR" ]; then
+            gh pr edit "$EXISTING_PR" --remove-label "semver:patch" --remove-label "semver:minor" --remove-label "semver:major" 2>/dev/null || true
+            gh pr edit "$EXISTING_PR" --title "$PR_TITLE" --body "$PR_BODY" --add-label "release" --add-label "semver:${SEMVER}"
+            echo "Updated PR #$EXISTING_PR"
+          else
+            gh pr create --draft --head rc --base main --title "$PR_TITLE" --body "$PR_BODY" --label "release" --label "semver:${SEMVER}"
+            echo "Created new release PR"
+          fi
