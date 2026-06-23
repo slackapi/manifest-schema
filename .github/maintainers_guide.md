@@ -85,7 +85,7 @@ Once you installed all the required dependencies, you can use the following one.
 
 When it's time to release find the [release candidate PR](https://github.com/slackapi/manifest-schema/pulls?q=is%3Apr+label%3Arelease+is%3Aopen) with generated changes.
 
-Ensure [commits](https://github.com/slackapi/manifest-schema/commits/main) since the [most recent tag](https://github.com/slackapi/manifest-schema/tags) include the correct [semantic version](http://semver.org/) labels and match the proposed version.
+Ensure the PRs of [commits](https://github.com/slackapi/manifest-schema/commits/main) since the [most recent tag](https://github.com/slackapi/manifest-schema/tags) have the correct [semantic version](http://semver.org/) labels and match the proposed version.
 
 Approve and merge these changes to publish the next release.
 

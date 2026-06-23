@@ -45,8 +45,9 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.credentials.outputs.token }}
         run: |
-          # Release tags are off main branch so sort and remove prior commit
+          # Highest version tag (not `git describe`: release tags are off-main after squash-merge).
           LATEST_TAG=$(git tag --list 'v*.*.*' --sort=-v:refname | head -n1)
+          # PRs since that tag, skipping the prior "version X.Y.Z" release commit.
           PR_NUMBERS=$(git log "${LATEST_TAG}..HEAD" --format='%s' \
             | grep -v -E '^version [0-9]+\.[0-9]+\.[0-9]+' \
             | grep -oP '#\K[0-9]+' || true)
@@ -60,7 +61,7 @@ jobs:
           # Search for highest semver label across PRs since the last tag
           SEMVER="patch"
           for PR in $PR_NUMBERS; do
-            LABELS=$(gh pr view "$PR" --json labels --jq '.labels[].name' 2>/dev/null || true)
+            LABELS=$(gh pr view "$PR" --json labels --jq '.labels[].name')
             if echo "$LABELS" | grep -q "semver:major"; then
               SEMVER="major"
               break
