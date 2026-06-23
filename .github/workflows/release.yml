@@ -27,6 +27,8 @@ jobs:
         with:
           client-id: ${{ secrets.GH_APP_CLIENT_ID }}
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: manifest-schema
           # Scope the token to only what the release steps need: push the rc
           # branch + tag (contents) and open/update the release PR.
           permission-contents: write
@@ -112,7 +114,7 @@ jobs:
           RELEASE_VERSION: ${{ steps.version.outputs.next }}
         run: |
           git config user.name "slackapi[bot]"
-          git config user.email "1043069+slackapi[bot]@users.noreply.github.com"
+          git config user.email "186980925+slackapi[bot]@users.noreply.github.com"
 
           # Rewrite the pinned $ref versions to the next release tag
           sed -i -E "s#manifest-schema/v[0-9]+\.[0-9]+\.[0-9]+/#manifest-schema/v${RELEASE_VERSION}/#g" manifest.schema.json
