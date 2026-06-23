@@ -29,8 +29,6 @@ jobs:
           private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
           repositories: manifest-schema
-          # Scope the token to only what the release steps need: push the rc
-          # branch + tag (contents) and open/update the release PR.
           permission-contents: write
           permission-pull-requests: write
 
@@ -39,6 +37,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: true
+          ref: main
           token: ${{ steps.credentials.outputs.token }}
 
       - name: Decide next version
@@ -46,15 +45,8 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.credentials.outputs.token }}
         run: |
-          # Highest release tag by version order. We deliberately do NOT use
-          # `git describe`: release tags are created on the `rc` branch and the
-          # PR is squash-merged, so the tagged commit is not an ancestor of
-          # `main` and `git describe` would walk past it to an older tag.
+          # Release tags are off main branch so sort and remove prior commit
           LATEST_TAG=$(git tag --list 'v*.*.*' --sort=-v:refname | head -n1)
-
-          # PR numbers since the latest tag, excluding prior release commits
-          # (subject "version X.Y.Z") so a previous release's labels don't leak
-          # into this version decision.
           PR_NUMBERS=$(git log "${LATEST_TAG}..HEAD" --format='%s' \
             | grep -v -E '^version [0-9]+\.[0-9]+\.[0-9]+' \
             | grep -oP '#\K[0-9]+' || true)
@@ -131,7 +123,7 @@ jobs:
           RELEASE_VERSION: ${{ steps.version.outputs.next }}
           SEMVER: ${{ steps.version.outputs.semver }}
         run: |
-          PR_TITLE="chore: release v${RELEASE_VERSION}"
+          PR_TITLE="version ${RELEASE_VERSION}"
           PR_BODY=$(cat <<EOF
           ### Summary
 
