@@ -126,8 +126,8 @@ jobs:
         env:
           RELEASE_VERSION: ${{ steps.version.outputs.next }}
         run: |
-          git config user.name "manifest-schema-releaser[bot]"
-          git config user.email "manifest-schema-releaser[bot]@users.noreply.github.com"
+          git config user.name "slackapi[bot]"
+          git config user.email "slackapi[bot]@users.noreply.github.com"
 
           # Rewrite the pinned $ref versions to the next release tag
           sed -i -E "s#manifest-schema/v[0-9]+\.[0-9]+\.[0-9]+/#manifest-schema/v${RELEASE_VERSION}/#g" manifest.schema.json
