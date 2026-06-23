@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  # TODO: temporary, for testing this workflow on the PR — remove before merge.
   pull_request:
   workflow_dispatch:
 
@@ -20,24 +21,8 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      # Mutating steps (push branch + tag, open PR) only run once the GitHub App
-      # secrets are present. Until then — and on pull_request events — the
-      # workflow exercises the version-decision logic without side effects.
-      - name: Check for release credentials
-        id: secrets
-        env:
-          GH_APP_ID: ${{ secrets.GH_APP_ID }}
-        run: |
-          if [ -n "$GH_APP_ID" ] && [ "${{ github.event_name }}" != "pull_request" ]; then
-            echo "enabled=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "enabled=false" >> "$GITHUB_OUTPUT"
-            echo "Release credentials absent or pull_request event: running in dry-run mode."
-          fi
-
       - name: Gather credentials
         id: credentials
-        if: steps.secrets.outputs.enabled == 'true'
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
           app-id: ${{ secrets.GH_APP_ID }}
@@ -51,13 +36,13 @@ jobs:
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           fetch-depth: 0
-          persist-credentials: ${{ steps.secrets.outputs.enabled == 'true' }}
-          token: ${{ steps.credentials.outputs.token || github.token }}
+          persist-credentials: true
+          token: ${{ steps.credentials.outputs.token }}
 
       - name: Decide next version
         id: version
         env:
-          GH_TOKEN: ${{ steps.credentials.outputs.token || github.token }}
+          GH_TOKEN: ${{ steps.credentials.outputs.token }}
         run: |
           # Highest release tag by version order. We deliberately do NOT use
           # `git describe`: release tags are created on the `rc` branch and the
@@ -122,7 +107,7 @@ jobs:
           echo "Bumping $LATEST_TAG to v$NEXT_VERSION"
 
       - name: Generate release commit
-        if: steps.version.outputs.has_changes == 'true' && steps.secrets.outputs.enabled == 'true'
+        if: steps.version.outputs.has_changes == 'true'
         env:
           RELEASE_VERSION: ${{ steps.version.outputs.next }}
         run: |
@@ -138,7 +123,7 @@ jobs:
           git push origin "v${RELEASE_VERSION}" --force
 
       - name: Create or update release PR
-        if: steps.version.outputs.has_changes == 'true' && steps.secrets.outputs.enabled == 'true'
+        if: steps.version.outputs.has_changes == 'true'
         env:
           GH_TOKEN: ${{ steps.credentials.outputs.token }}
           RELEASE_VERSION: ${{ steps.version.outputs.next }}
