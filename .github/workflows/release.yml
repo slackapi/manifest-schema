@@ -135,8 +135,7 @@ jobs:
           PR_BODY=$(cat <<EOF
           ### Summary
 
-          Release v${RELEASE_VERSION}. This bumps the \`\$ref\` URLs in
-          \`manifest.schema.json\` to the \`v${RELEASE_VERSION}\` tag.
+          Release v${RELEASE_VERSION}. This bumps the \`\$ref\` URLs in \`manifest.schema.json\` to the \`v${RELEASE_VERSION}\` tag.
 
           ### Testing
 
@@ -146,9 +145,7 @@ jobs:
 
           ### Reviewers
 
-          The \`v${RELEASE_VERSION}\` tag has already been pushed to point at this
-          branch's release commit. Once merged, the change is live at the
-          [\`main\` raw URL](https://raw.githubusercontent.com/${{ github.repository }}/main/manifest.schema.json).
+          The \`v${RELEASE_VERSION}\` tag has already been pushed to point at this branch's release commit. Once merged, the change is live at the [\`main\` raw URL](https://raw.githubusercontent.com/${{ github.repository }}/main/manifest.schema.json).
           EOF
           )
 
