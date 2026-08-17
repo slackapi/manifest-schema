@@ -495,6 +495,24 @@
         }
       }
     },
+    "app-manifests.v1.features.code_channels": {
+      "type": "object",
+      "description": "Settings for apps that create code channels: dedicated channels where an agent collaborates with a user on a task.",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "A boolean that specifies whether or not code channels are enabled for the app."
+        },
+        "slash_command_url": {
+          "type": "string",
+          "format": "uri",
+          "maxLength": 3000,
+          "pattern": "^https?://",
+          "description": "The URL where Slack delivers invocations of the agent's runtime-registered code channel slash commands. Must be an http:// or https:// URL, at most 3000 characters. Not required for Socket Mode or hosted apps."
+        }
+      }
+    },
     "app-manifests.v1.features.schema": {
       "type": "object",
       "properties": {
@@ -524,6 +542,9 @@
         },
         "agent_view": {
           "$ref": "#/definitions/app-manifests.v1.features.agent_view"
+        },
+        "code_channels": {
+          "$ref": "#/definitions/app-manifests.v1.features.code_channels"
         }
       },
       "description": "A group of settings corresponding to the Features section of the app config pages.",
