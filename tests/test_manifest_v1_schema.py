@@ -1,13 +1,13 @@
 import pytest
 from jsonschema import ValidationError, validate
 
-from .utils import get_json, get_schema
+from .utils import get_json, get_local_schema, get_schema
 
 
 class TestManifestV1Schema:
     def test_success(self):
         # GIVEN
-        schema = get_schema()
+        schema = get_local_schema(1)
         manifest = get_json("tests/manifests/v1/manifest.valid.json")
         # WHEN
         try:
@@ -18,7 +18,7 @@ class TestManifestV1Schema:
 
     def test_no_metadata(self):
         # GIVEN
-        schema = get_schema()
+        schema = get_local_schema(1)
         manifest = get_json("tests/manifests/v1/manifest.valid.json")
         del manifest["_metadata"]
         # WHEN
