@@ -32,7 +32,6 @@ ignore = [
 ]
 
 [tool.ruff.lint.pydocstyle]
-# Keep `select = ["D"]` a bare category select; listing explicit D codes would override this convention.
 convention = "google"
 
 [tool.ruff.format]

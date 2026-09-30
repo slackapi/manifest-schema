@@ -10,8 +10,8 @@ test_target="$1"
 
 if [[ $test_target != "" ]]
 then
-  ruff format tests/ && \
+  ./scripts/format.sh && \
     pytest -vv $1
 else
-  ruff format tests/ && pytest -vv
+  ./scripts/format.sh && pytest -vv
 fi

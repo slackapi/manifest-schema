@@ -12,11 +12,9 @@ pip install -U -e .
 
 if [[ $test_target != "" ]]
 then
-  ruff format tests/ && \
-    npx prettier --write schemas/**/*.json *.json tests/**/*.json && \
+  ./scripts/format.sh && \
     pytest $1
 else
-  ruff format tests/ && \
-    npx prettier --write schemas/**/*.json *.json tests/**/*.json && \
+  ./scripts/format.sh && \
     pytest
 fi
