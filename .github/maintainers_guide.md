@@ -47,10 +47,10 @@ This project contains an [`.editorconfig`](../.editorconfig) file. It is used by
 ### Linting & Formatting
 
 ```zsh
-# Run flake8 & prettier from root directory for linting
+# Run ruff & prettier from root directory for linting
 ./scripts/lint.sh
 
-# Run black & prettier from root directory for code formatting
+# Run ruff & prettier from root directory for code formatting
 ./scripts/format.sh
 ```
 
