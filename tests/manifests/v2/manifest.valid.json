@@ -15,6 +15,10 @@
     "bot_user": {
       "display_name": "test",
       "always_online": false
+    },
+    "code_channels": {
+      "enabled": true,
+      "slash_command_url": "https://example.com/slack/code-channel-commands"
     }
   },
   "oauth_config": {
