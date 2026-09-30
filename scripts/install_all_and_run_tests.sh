@@ -12,11 +12,11 @@ pip install -U -e .
 
 if [[ $test_target != "" ]]
 then
-  black tests/ && \
+  ruff format tests/ && \
     npx prettier --write schemas/**/*.json *.json tests/**/*.json && \
     pytest $1
 else
-  black tests/ && \
+  ruff format tests/ && \
     npx prettier --write schemas/**/*.json *.json tests/**/*.json && \
     pytest
 fi

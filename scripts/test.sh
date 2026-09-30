@@ -10,8 +10,8 @@ test_target="$1"
 
 if [[ $test_target != "" ]]
 then
-  black tests/ && \
+  ruff format tests/ && \
     pytest -vv $1
 else
-  black tests/ && pytest -vv
+  ruff format tests/ && pytest -vv
 fi

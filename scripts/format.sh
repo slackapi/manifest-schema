@@ -1,7 +1,8 @@
 #!/bin/bash
-# ./scripts/run_flake8.sh
+# ./scripts/format.sh
 
 script_dir=$(dirname $0)
 cd ${script_dir}/.. && \
-  black tests/ && \
+  ruff check --fix tests/ && \
+  ruff format tests/ && \
   npx prettier --write schemas/**/*.json *.json tests/**/*.json
