@@ -31,7 +31,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -U .
-      - name: Lint with flake8 & Prettier
+      - name: Lint with ruff & Prettier
         run: |
           bash scripts/lint.sh
 
