@@ -738,6 +738,9 @@
         "allowed_ip_address_ranges": {
           "$ref": "#/definitions/app-manifests.v1.settings.allowed_ip_address_ranges"
         },
+        "app_level_token_rotation_enabled": {
+          "type": "boolean"
+        },
         "event_subscriptions": {
           "$ref": "#/definitions/app-manifests.v1.settings.event_subscriptions"
         },
