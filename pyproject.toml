@@ -6,7 +6,7 @@ license = "MIT"
 license-files = ["LICENSE"]
 authors = [{ name = "Slack Technologies, LLC", email = "opensource@slack.com" }]
 dependencies = [
-	"ruff==0.16.4",
+	"ruff==0.16.10",
 	"pytest==9.1.1",
 	"jsonschema==4.26.0",
 ]
