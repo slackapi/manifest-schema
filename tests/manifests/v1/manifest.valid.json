@@ -17,6 +17,10 @@
       "display_name": "Bolt Template App",
       "always_online": false
     },
+    "code_channels": {
+      "enabled": true,
+      "slash_command_url": "https://example.com/slack/code-channel-commands"
+    },
     "shortcuts": [
       {
         "name": "Run sample shortcut",
