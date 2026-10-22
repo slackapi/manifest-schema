@@ -35,7 +35,11 @@
         "description": "Runs a sample command",
         "should_escape": false
       }
-    ]
+    ],
+    "user_connections": {
+      "is_enabled": true,
+      "auth_hosts": ["example.com", "auth.example.com"]
+    }
   },
   "oauth_config": {
     "scopes": {
