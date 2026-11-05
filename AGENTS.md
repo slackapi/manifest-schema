@@ -20,10 +20,10 @@ pip install -U -e .
 # Run a single test file
 ./scripts/test.sh tests/test_manifest_v2_schema.py
 
-# Lint (flake8 for Python, Prettier for JSON)
+# Lint (ruff for Python, Prettier for JSON)
 ./scripts/lint.sh
 
-# Format (black for Python, Prettier for JSON)
+# Format (ruff for Python, Prettier for JSON)
 ./scripts/format.sh
 ```
 
@@ -37,7 +37,7 @@ Tests validate manifests against the schema using `jsonschema.validate()`. Each 
 
 ## Style
 
-- Python: black, line length 100, flake8
+- Python: ruff (lint + format), line length 100, config in `pyproject.toml`
 - JSON: Prettier, 2-space indent, LF line endings (see `.editorconfig`)
 - Tests use pytest with `GIVEN/WHEN/THEN` comment structure
 

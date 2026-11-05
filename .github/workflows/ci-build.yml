@@ -7,7 +7,7 @@ on:
   pull_request:
 
 env:
-  LATEST_PY: "3.14"
+  LATEST_PY: "3.15"
   LATEST_NODE: "24.x"
 
 jobs:
@@ -21,17 +21,17 @@ jobs:
         with:
           persist-credentials: false
       - name: Set up Python ${{ env.LATEST_PY }}
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: ${{ env.LATEST_PY }}
       - name: Set up Node.js ${{ env.LATEST_NODE }}
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: ${{ env.LATEST_NODE }}
       - name: Install dependencies
         run: |
           pip install -U .
-      - name: Lint with flake8 & Prettier
+      - name: Lint with ruff & Prettier
         run: |
           bash scripts/lint.sh
 
@@ -45,7 +45,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Set up Python ${{ env.LATEST_PY }}
-        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: ${{ env.LATEST_PY }}
       - name: Install dependencies
