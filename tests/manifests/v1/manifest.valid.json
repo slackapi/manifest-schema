@@ -17,6 +17,10 @@
       "display_name": "Bolt Template App",
       "always_online": false
     },
+    "code_channels": {
+      "enabled": true,
+      "slash_command_url": "https://example.com/slack/code-channel-commands"
+    },
     "shortcuts": [
       {
         "name": "Run sample shortcut",
@@ -31,7 +35,11 @@
         "description": "Runs a sample command",
         "should_escape": false
       }
-    ]
+    ],
+    "user_connections": {
+      "is_enabled": true,
+      "auth_hosts": ["example.com", "auth.example.com"]
+    }
   },
   "oauth_config": {
     "scopes": {

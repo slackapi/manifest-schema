@@ -491,6 +491,29 @@
         }
       }
     },
+    "app-manifests.v1.features.user_connections": {
+      "type": "object",
+      "description": "Settings for apps that use standardized app authentication, where Slack renders a Connect button that sends users to the app's provider to connect their account. The app must also subscribe to the user_connection and user_connection_status_requested bot events.",
+      "required": ["is_enabled", "auth_hosts"],
+      "additionalProperties": false,
+      "properties": {
+        "is_enabled": {
+          "type": "boolean",
+          "description": "A boolean that specifies whether or not standardized app authentication is enabled for the app."
+        },
+        "auth_hosts": {
+          "type": "array",
+          "description": "The hosts, without a scheme, that a provider's auth_url and disconnect_url may use. Subdomains of a listed host are also allowed. Registrable domains only: bare top-level domains and public suffixes such as co.uk are rejected.",
+          "minItems": 1,
+          "maxItems": 25,
+          "items": {
+            "type": "string",
+            "pattern": "^(?![\\.\\-])([-A-Za-z0-9\\.])+([A-Za-z0-9])$",
+            "maxLength": 255
+          }
+        }
+      }
+    },
     "app-manifests.v1.features.schema": {
       "type": "object",
       "description": "Key app features driving interactivity and functionality.",
@@ -525,6 +548,9 @@
         },
         "code_channels": {
           "$ref": "#/definitions/app-manifests.v1.features.code_channels"
+        },
+        "user_connections": {
+          "$ref": "#/definitions/app-manifests.v1.features.user_connections"
         }
       }
     },
